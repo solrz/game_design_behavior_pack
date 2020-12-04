@@ -1,0 +1,380 @@
+{
+	"format_version": "1.14.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "minecraft:fox",
+			"is_summonable": true
+		},
+		"components": {
+			"minecraft:scale": {
+				"value": 0.5
+			},
+			"minecraft:health": {
+        "value": 100,
+        "max": 100
+      }
+		},
+		"component_groups": {
+			"minecraft:fox_ambient_normal": {
+				"minecraft:ambient_sound_interval": {
+					"event_name": "ambient"
+				}
+			},
+			"minecraft:fox_ambient_sleep": {
+				"minecraft:ambient_sound_interval": {
+					"event_name": "sleep"
+				}
+			},
+			"adult": {
+
+			},
+			"child": {
+				"minecraft:is_baby": {
+				},
+				"minecraft:scale": {
+					"value": 0.5
+				}
+			},
+			"default": {
+				"minecraft:behavior.avoid_mob_type": {
+					"entity_types": [
+						{
+							"filters": {
+								"all_of": [
+									{
+										"subject": "other",
+										"test": "is_family",
+										"value": "player"
+									},
+									{
+										"subject": "other",
+										"test": "is_sneaking",
+										"value": false
+									}
+								]
+							},
+							"max_dist": 10,
+							"sprint_speed_multiplier": 1.5,
+							"walk_speed_multiplier": 1.0
+						}
+					],
+					"priority": 0
+				},
+				"minecraft:behavior.look_at_player": {
+					"angle_of_view_horizontal": 210,
+					"angle_of_view_vertical": 150,
+					"look_distance": 6.0,
+					"look_time": [
+						2,
+						5
+					],
+					"priority": 1,
+					"probability": 0.02
+				},
+				"minecraft:behavior.nap": {
+					"can_nap_filters": {
+						"all_of": [
+							{
+								"operator": "==",
+								"subject": "self",
+								"test": "in_water",
+								"value": false
+							},
+							{
+								"operator": "==",
+								"subject": "self",
+								"test": "on_ground",
+								"value": true
+							}
+						]
+					},
+					"cooldown_max": 7.0,
+					"cooldown_min": 2.0,
+					"mob_detect_dist": 12.0,
+					"mob_detect_height": 6.0,
+					"priority": 3,
+					"wake_mob_exceptions": {
+						"any_of": [
+							{
+								"operator": "==",
+								"subject": "other",
+								"test": "is_family",
+								"value": "fox"
+							},
+							{
+								"operator": "==",
+								"subject": "other",
+								"test": "is_sneaking",
+								"value": true
+							}
+						]
+					}
+				},
+				"minecraft:behavior.random_look_around": {
+					"priority": 1
+				},
+				"minecraft:behavior.random_look_around_and_sit": {
+					"max_look_count": 5,
+					"max_look_time": 100,
+					"min_look_count": 2,
+					"min_look_time": 80,
+					"priority": 1,
+					"probability": 0.005
+				},
+				"minecraft:breathable": {
+					"breathes_solids": true
+				},
+				"minecraft:can_climb": {
+				},
+				"minecraft:collision_box": {
+					"height": 0.7,
+					"width": 0.6
+				},
+				"minecraft:damage_sensor": {
+					"triggers": [
+						{
+							"deals_damage": true
+						}
+					]
+				},
+				"minecraft:jump.static": {
+				},
+				"minecraft:movement": {
+					"value": 0.3
+				},
+				"minecraft:movement.basic": {
+				},
+				"minecraft:navigation.walk": {
+					"avoid_portals": true,
+					"avoid_water": true,
+					"can_sink": false
+				},
+				"minecraft:persistent": {
+				},
+				"minecraft:physics": {
+				},
+				"minecraft:pushable": {
+					"is_pushable": true,
+					"is_pushable_by_piston": true
+				},
+				"minecraft:scheduler": {
+					"max_delay_secs": 0,
+					"min_delay_secs": 0,
+					"scheduled_events": [
+						{
+							"event": "minecraft:ambient_sleep",
+							"filters": [
+								{
+									"test": "is_sleeping",
+									"value": true
+								}
+							]
+						},
+						{
+							"event": "minecraft:ambient_normal",
+							"filters": {
+								"all_of":[
+									{
+										"test": "is_sleeping",
+										"value": false
+									},
+									{
+										"any_of":[
+											{
+												"test": "is_daytime",
+												"value": true
+											},
+											{
+												"operator": "<=",
+												"test": "distance_to_nearest_player",
+												"value": 16
+											}
+										]
+									}
+								]
+							}
+						}
+					]
+				},
+				"minecraft:type_family": {
+					"family": [
+						"fox"
+					]
+				},
+				"minecraft:variant": {
+					"value": 0
+				}
+			},
+			"despawn": {
+				"minecraft:despawn": {
+				}
+			},
+			"environment_sensor": {
+				"minecraft:environment_sensor": {
+					"triggers": [
+						{
+							"event": "child_add",
+							"filters": {
+								"all_of": [
+									{
+										"test": "has_tag",
+										"value": "child"
+									},
+									{
+										"operator": "!=",
+										"test": "has_component",
+										"value": "minecraft:is_baby"
+									}
+								]
+							}
+						},
+						{
+							"event": "child_remove",
+							"filters": {
+								"all_of": [
+									{
+										"operator": "!=",
+										"test": "has_tag",
+										"value": "child"
+									},
+									{
+										"test": "has_component",
+										"value": "minecraft:is_baby"
+									}
+								]
+							}
+						},
+						{
+							"event": "despawn",
+							"filters": {
+								"test": "has_tag",
+								"value": "despawn"
+							}
+						},
+						{
+							"event": "target_add",
+							"filters": {
+								"all_of": [
+									{
+										"test": "has_tag",
+										"value": "target"
+									},
+									{
+										"operator": "!=",
+										"test": "has_component",
+										"value": "minecraft:behavior.nearest_attackable_target"
+									}
+								]
+							}
+						},
+						{
+							"event": "target_remove",
+							"filters": {
+								"all_of": [
+									{
+										"operator": "!=",
+										"test": "has_tag",
+										"value": "target"
+									},
+									{
+										"test": "has_component",
+										"value": "minecraft:behavior.nearest_attackable_target"
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			"target": {
+				"minecraft:attack": {
+					"damage": 0
+				},
+				"minecraft:behavior.melee_attack": {
+					"reach_multiplier": 0
+				},
+				"minecraft:behavior.nearest_attackable_target": {
+					"priority": 0,
+					"entity_types": [
+						{
+							"filters": {
+								"subject": "other",
+								"test": "is_family",
+								"value": "target"
+							},
+							"max_dist": 32,
+							"must_see": false
+						}
+					],
+					"attack_interval": 1,
+					"reselect_targets": true
+				}
+			}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+				"add": {
+					"component_groups": [
+						"adult",
+						"default",
+						"environment_sensor"
+					]
+				}
+			},
+			"minecraft:ambient_normal": {
+				"add": {
+					"component_groups": [
+						"minecraft:fox_ambient_normal"
+					]
+				}
+			},
+			"minecraft:ambient_sleep": {
+				"add": {
+					"component_groups": [
+						"minecraft:fox_ambient_sleep"
+					]
+				}
+			},
+			"child_add": {
+				"add": {
+					"component_groups": [
+						"child"
+					]
+				}
+			},
+			"child_remove": {
+				"remove": {
+					"component_groups": [
+						"child"
+					]
+				},
+				"add": {
+					"component_groups": [
+						"adult"
+					]
+				}
+			},
+			"despawn": {
+				"add": {
+					"component_groups": [
+						"despawn"
+					]
+				}
+			},
+			"target_add": {
+				"add": {
+					"component_groups": [
+						"target"
+					]
+				}
+			},
+			"target_remove": {
+				"remove": {
+					"component_groups": [
+						"target"
+					]
+				}
+			}
+		}
+	}
+}

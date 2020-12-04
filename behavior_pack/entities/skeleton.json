@@ -1,0 +1,104 @@
+{
+  "format_version": "1.14.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "test:skeleton",
+      "is_spawnable": false,
+      "is_summonable": true
+    },
+    "component_groups": {},
+    "components": {
+      "minecraft:nameable": {},
+      "minecraft:type_family": {
+        "family": [
+          "skeleton",
+          "undead",
+          "monster",
+          "attacker",
+          "mob"
+        ]
+      },
+      "minecraft:jump.static": {},
+      "minecraft:can_climb": {},
+      "minecraft:scale": {
+        "value": 1
+      },
+      "minecraft:movement": {
+        "value": 0.23
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:navigation.walk": {
+        "is_amphibious": true,
+        "can_pass_doors": true,
+        "can_walk": true,
+        "can_break_doors": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:annotation.break_door": {},
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:physics": {},
+      "minecraft:behavior.mount_pathing": {
+        "priority": 2,
+        "speed_multiplier": 1.25,
+        "target_dist": 0,
+        "track_target": true
+      },
+      "minecraft:health": {
+        "value": 100,
+        "max": 100
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 9
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 3
+      },
+      "minecraft:equipment": {
+        "table": "loot_tables/entities/skeleton_gear.json"
+      },
+      "minecraft:shooter": {
+        "def": "minecraft:fireball"
+      },
+      "minecraft:behavior.ranged_attack": {
+        "priority": 0,
+        "attack_interval_min": 1,
+        "attack_interval_max": 5,
+        "attack_radius": 40
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 2,
+        "must_see": false,
+        "reselect_targets": true,
+        "within_radius": 32,
+        "must_see_forget_duration": 17,
+        "entity_types": [
+          {
+            "filters": {
+              "any_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "!=",
+                  "value": "attacker"
+                }
+              ]
+            },
+            "max_dist": 40,
+            "must_see": false
+          }
+        ]
+      }
+    },
+    "events": {}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "format_version": "1.14.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "minecraft:villager"
+      "is_summonable": true
+    },
+    "components": {
+      "minecraft:scale": {
+        "value": 2.0
+      }"minecraft:health": {
+        "value": 100,
+        "max": 100
+      }
+    }
+  }
+}

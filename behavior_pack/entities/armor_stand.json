@@ -1,0 +1,102 @@
+{
+  "format_version": "1.14.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "minecraft:armor_stand",
+      "is_spawnable": false,
+      "is_summonable": true
+    },
+    "components": {
+      "minecraft:nameable": {},
+      "minecraft:type_family": {
+        "family": [
+          "armor_stand",
+          "monster",
+          "mob"
+        ]
+      },
+      "minecraft:scale": {
+        "value": 2
+      },
+      "minecraft:movement": {
+        "value": 0.23
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:navigation.walk": {
+        "is_amphibious": true,
+        "can_pass_doors": true,
+        "can_walk": true,
+        "can_break_doors": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:annotation.break_door": {},
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:physics": {},
+      "minecraft:behavior.mount_pathing": {
+        "priority": 2,
+        "speed_multiplier": 1.25,
+        "target_dist": 0,
+        "track_target": true
+      },
+      "minecraft:health": {
+        "value": 100,
+        "max": 100
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 9
+      },
+      "minecraft:attack": {
+        "damage": 10
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 3
+      },
+      "minecraft:jump.static": {},
+      "minecraft:can_climb": {},
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 2,
+        "must_see": false,
+        "reselect_targets": true,
+        "within_radius": 32,
+        "must_see_forget_duration": 17,
+        "entity_types": [
+          {
+            "filters": {
+              "any_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "villager"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "irongolem"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "armorstand"
+                }
+              ]
+            },
+            "max_dist": 40,
+            "must_see": false
+          }
+        ]
+      }
+    },
+    "component_groups": {},
+    "events": {}
+  }
+}
